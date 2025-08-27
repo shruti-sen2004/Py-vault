@@ -2,6 +2,7 @@
 ## Present in python standard library
 
 import itertools
+import operator # for multiply op in accumulate()
 ### Infinite iterators
 
 ## 1. count()
@@ -95,6 +96,76 @@ result = itertools.dropwhile(l_func,nums)
 ## 7. takewhile()
 ## take all value until first iterable that corresponds to false ocuurs 
 result = itertools.takewhile(l_func,nums)
-for i in result:
-    print(i)
 
+## 8. accumualte()
+## returns accumulated sums of each iterable that it sees (last value is the total accumulated sum of that list)
+## By default addition but can use other operations too
+result = itertools.accumulate(nums, operator.mul)
+# for i in result:
+#     print(i)
+
+## 9. groupby()
+## groups values based on a certain key and return a stream of tuples
+## a little diffrent from SQL groupby as it needs the dictionary to be pre-sorted
+def get_state(person):
+    return person['state'] # tells groupby to group by state
+
+people = [
+    {
+        'name': 'John Doe',
+        'city': 'Gotham',
+        'state': 'NY'
+    },
+    {
+        'name': 'Jane Doe',
+        'city': 'Kings Landing',
+        'state': 'NY'
+    },
+    {
+        'name': 'Corey Schafer',
+        'city': 'Boulder',
+        'state': 'CO'
+    },
+    {
+        'name': 'Al Einstein',
+        'city': 'Denver',
+        'state': 'CO'
+    },
+    {
+        'name': 'John Henry',
+        'city': 'Hinton',
+        'state': 'WV'
+    },
+    {
+        'name': 'Randy Moss',
+        'city': 'Rand',
+        'state': 'WV'
+    },
+    {
+        'name': 'Nicole K',
+        'city': 'Asheville',
+        'state': 'NC'
+    },
+    {
+        'name': 'Jim Doe',
+        'city': 'Charlotte',
+        'state': 'NC'
+    },
+    {
+        'name': 'Jane Taylor',
+        'city': 'Faketown',
+        'state': 'NC'
+    }
+]
+
+person_group = itertools.groupby(people, get_state)
+for key, group in person_group:
+    print(key, len(list(group))) # as it is an iterator first cast into list
+    # for person in group:
+    #     print(person)
+    # print()
+
+## 10. tee()
+## replicates the iterables
+## after creating copies we can only use the copy and not the original iterator to avoid unintened exhaution 
+copy1, copy2 = itertools.tee(person_group)
