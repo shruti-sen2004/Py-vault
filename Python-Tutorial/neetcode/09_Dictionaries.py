@@ -60,3 +60,9 @@ my_dict.pop("d",0) # handle it; don't throw error just return 0
 
 for value in my_dict.values(): # iterate ver values
     print(value)
+
+# sorted by default arranges in ascending on basis on keys
+counts ={'a':1, 'b':3, 'c':2}
+res_asc= dict(sorted(counts.items(), key=lambda item: item[1])) # sort on the base of value in ascending
+res_dsc = dict(sorted(counts.items(), key=lambda item: item[1], reverse=True)) # sort on the base of value in descending
+print(res_asc)
