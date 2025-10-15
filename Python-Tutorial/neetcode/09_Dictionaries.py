@@ -66,3 +66,8 @@ counts ={'a':1, 'b':3, 'c':2}
 res_asc= dict(sorted(counts.items(), key=lambda item: item[1])) # sort on the base of value in ascending
 res_dsc = dict(sorted(counts.items(), key=lambda item: item[1], reverse=True)) # sort on the base of value in descending
 print(res_asc)
+
+# switch key and value position
+a = {'Hello':'World', 'First': 1}
+b = {val: k for k , val in a.items()}
+print(b)
