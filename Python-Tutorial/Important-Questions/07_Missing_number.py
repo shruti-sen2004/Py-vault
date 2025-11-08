@@ -1,0 +1,9 @@
+l = list(map(int,input().split()))
+flag = 0
+for i in range(1,len(l)+1):
+	if i not in l:
+		print(f'Missing number: {i}')
+		flag = 1
+
+if flag == 0:
+	print("No missing number")
